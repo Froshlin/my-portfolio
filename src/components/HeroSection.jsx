@@ -1,11 +1,12 @@
 import React from "react";
 import resume from "../assets/Joshua_Oni_resume.pdf";
 import myPic from "../assets/my_image1.jpg";
-import * as motion from "motion/react-client"
+import ShootingStars from "./ShootingStars";
 
 function HeroSection() {
   return (
-    <div className='bg-[url("/hero-bg.png")] bg-[#121928] bg-cover bg-center min-h-screen flex flex-col lg:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12 text-white px-4 sm:px-6 md:px-12 lg:px-20 py-8 lg:py-0'>
+    <div className='bg-[url("/hero-bg.png")] bg-[#121928] bg-cover bg-center min-h-screen flex flex-col lg:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12 text-white px-4 sm:px-6 md:px-12 lg:px-20 py-8 lg:py-0 relative overflow-hidden'>
+      <ShootingStars/>
       {/* Hero Text Content */}
       <div className="flex-1 max-w-4xl text-center lg:text-left order-2 lg:order-1">
         <div className="flex flex-col mb-6 sm:mb-8 lg:mb-10">

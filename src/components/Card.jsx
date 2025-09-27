@@ -7,7 +7,7 @@ import project3 from "../assets/project-3.png";
 function Card() {
   return (
     <div id="projects">
-      <h2 className="bg-[#111827] text-white text-4xl text-center font-bold pt-48">
+      <h2 className="bg-[#111827] text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-bold mb-8 sm:mb-10 md:mb-12 pt-36">
         Feautured Projects
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-6 md:px-20 py-28 bg-[#111827]">

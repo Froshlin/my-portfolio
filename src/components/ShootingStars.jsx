@@ -7,8 +7,8 @@ const ShootingStars = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {stars.map((_, i) => {
-        const delay = Math.random() * 8; // random delay for each star
-        const top = Math.random() * 80; // random vertical position
+        const delay = Math.random() * 26; // random delay for each star
+        const top = Math.random() * 70; // random vertical position
 
         return (
           <motion.div

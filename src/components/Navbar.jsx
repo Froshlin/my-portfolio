@@ -29,9 +29,9 @@ function Navbar() {
       <div className="flex justify-between items-center w-full px-4 sm:px-6 md:px-12 lg:px-20 py-3 sm:py-4 text-white">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold hover:text-[#3676de] transition-colors duration-300 cursor-pointer">
+          <a href="https://joshuaoni-portfolio.vercel.app/" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold hover:text-[#3676de] transition-colors duration-300 cursor-pointer">
             Joshua Oni
-          </h1>
+          </a>
         </div>
 
         {/* Desktop Menu Items */}

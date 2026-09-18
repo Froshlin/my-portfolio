@@ -1,54 +1,118 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion } from "motion/react";
 import resume from "../assets/Joshua_Oni_resume.pdf";
 import myPic from "../assets/my_image1.jpg";
-import ShootingStars from "./ShootingStars";
+import BackgroundFX from "./BackgroundFX";
+
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 function HeroSection() {
+  const spotlightRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const el = spotlightRef.current;
+    if (!el) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    el.style.setProperty("--x", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--y", `${e.clientY - rect.top}px`);
+  };
+
   return (
-    <div className='bg-[url("/hero-bg.png")] bg-[#121928] bg-cover bg-center min-h-screen flex flex-col lg:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12 text-white px-4 sm:px-6 md:px-12 lg:px-20 py-8 lg:py-0 relative overflow-hidden'>
-      <ShootingStars/>
+    <div
+      onMouseMove={handleMouseMove}
+      className="bg-paper min-h-screen flex flex-col lg:flex-row justify-center items-center gap-10 sm:gap-12 lg:gap-16 text-ink px-4 sm:px-6 md:px-12 lg:px-20 py-8 lg:py-0 relative overflow-hidden"
+    >
+      <BackgroundFX variant="hero" />
+
+      {/* subtle cursor-follow spotlight, desktop only */}
+      <div
+        ref={spotlightRef}
+        aria-hidden
+        className="hidden lg:block pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(360px circle at var(--x, 50%) var(--y, 20%), rgba(31,75,63,0.07), transparent 70%)",
+        }}
+      />
+
       {/* Hero Text Content */}
-      <div className="flex-1 max-w-4xl text-center lg:text-left order-2 lg:order-1">
-        <div className="flex flex-col mb-6 sm:mb-8 lg:mb-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 leading-tight">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="flex-1 max-w-4xl text-center lg:text-left order-2 lg:order-1 relative z-10"
+      >
+        <motion.p
+          variants={item}
+          className="text-gold font-semibold tracking-[0.2em] text-xs sm:text-sm uppercase mb-4"
+        >
+          Frontend Developer
+        </motion.p>
+
+        <motion.div variants={item} className="flex flex-col mb-6 sm:mb-8">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] text-ink">
             Hi, I'm Joshua Oni
           </h1>
-          <h3 className="text-[#3676de] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
-            Frontend Developer
-          </h3>
-        </div>
+        </motion.div>
 
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+        <motion.p
+          variants={item}
+          className="text-base sm:text-lg md:text-xl text-muted mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0"
+        >
           I build user interface modern web applications using React.js and
           Next.js, creating seamless user experiences.
-        </p>
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <motion.div
+          variants={item}
+          className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+        >
           <a
             href="#projects"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-center font-medium"
+            className="bg-accent text-white px-7 py-3 rounded-full hover:bg-accent-light transition-colors duration-300 text-center font-medium"
           >
             View Projects
           </a>
-          <button className="bg-transparent border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 hover:text-white transition-colors duration-300 cursor-pointer font-medium">
-            <a href={resume} download="resume">
-              Download Resume
-            </a>
-          </button>
-        </div>
-      </div>
+          <a
+            href={resume}
+            download="resume"
+            className="bg-transparent border border-line text-ink px-7 py-3 rounded-full hover:border-accent hover:text-accent transition-colors duration-300 text-center font-medium"
+          >
+            Download Resume
+          </a>
+        </motion.div>
+      </motion.div>
 
       {/* Hero Image */}
-      <div className="flex-shrink-0 order-1 lg:order-2">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+        className="flex-shrink-0 order-1 lg:order-2 relative z-10"
+      >
         <div className="relative">
           <img
             src={myPic}
             alt="Joshua Oni"
-            className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 rounded-full border-4 border-blue-600 object-cover transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer shadow-2xl"
+            className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 rounded-full border-4 border-paper object-cover transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer shadow-xl"
           />
-          <div className="absolute inset-0 rounded-full border-4 border-blue-600/20 blur-sm"></div>
+          <div className="absolute inset-0 rounded-full ring-1 ring-accent/15"></div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
